@@ -53,3 +53,11 @@ inoremap <Up>    <NOP>
 inoremap <Down>  <NOP>
 inoremap <Left>  <NOP>
 inoremap <Right> <NOP>
+
+" esc key mapped to jj and kk
+map! jj <Esc>
+map! kk <Esc>
+
+" reversed 'j' and 'k' key mappings
+:nnoremap j k
+:nnoremap k j
