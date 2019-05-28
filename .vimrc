@@ -26,7 +26,10 @@ filetype plugin indent on
 "autocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Mapped NERDTree to Ctrl + n
+" Remap code completion to Ctrl+Space
+:inoremap <C-@> <C-n>
+
+" Map NERDTree to Ctrl + n
 map <C-n> :NERDTreeToggle<CR>
 
 " Closes NERDTree explorer if it is the only opened window
@@ -61,3 +64,9 @@ map! kk <Esc>
 " reversed 'j' and 'k' key mappings
 :nnoremap j k
 :nnoremap k j
+
+" Map h,j,k,l with C- in insert mode
+:inoremap <C-j> <Up>
+:inoremap <C-k> <Down>
+:inoremap <C-h> <Left>
+:inoremap <C-l> <Right>
