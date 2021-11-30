@@ -1,12 +1,14 @@
 syntax on "basic highlighting
 
+set ruler "show the cursor position all the time
+set encoding=utf8 "Set utf8 as standard encoding and en_US as the standard language
 set noerrorbells "sound effects when go to EOL
 set tabstop=4 softtabstop=4 "tab indentation, softtabstop = spaces long
 set shiftwidth=4 "shifts it over by spaces
 set expandtab
 set smartindent "let vim indent for me
 set nowrap "no wrapping
-set smartcase "case-sensitive searching
+"set smartcase "case-sensitive searching
 set noswapfile "since we are using undodir and undofile
 set nobackup
 set undodir=~/.vim/undodir "location of undo dir. Needs to create this folder
@@ -14,6 +16,11 @@ set undofile "file per file undo
 set incsearch "highlight results while typing keywords
 set laststatus=2
 set cursorline
+set ignorecase "Ignore case when searching
+set hlsearch "Highlight search results
+set showmatch "Show matching brackets when text indicator is over them
+set mat=2 "how many tenths of a second to blink when matching brackets
+"set foldcolumn=1 "add a bit extra margin to the left
 
 set nocompatible
 set vb t_vb=        "no visual bell & flash
@@ -43,8 +50,10 @@ Plug 'itchyny/lightline.vim' "status bar
 Plug 'mhinz/vim-startify' "start up page
 Plug 'https://github.com/tyru/open-browser.vim' "open URI with browser
 Plug 'https://github.com/tpope/vim-surround' "quoting & parenthesizing
+Plug 'ervandew/supertab' 
 
-Plug 'shawncplus/phpcomplete.vim' "Improved PHP omni-completion
+Plug 'lvht/msgpack-rpc'
+Plug 'lvht/phpcd.vim'
 Plug 'StanAngeloff/php.vim' "php syntax
 Plug 'stephpy/vim-php-cs-fixer' "php formatting
 Plug 'dsawardekar/wordpress.vim' "For WP Dev
@@ -60,6 +69,9 @@ call plug#end()
 colorscheme simple-dark
 set background=dark
 
+let g:wordpress_vim_wordpress_path="~/wordpress"
+set tags+=~/wordpress/tags
+
 "=====================
 "   Custom Remapping
 "=====================
@@ -70,8 +82,15 @@ noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
 noremap <leader>r :source %<CR>
 
+" Useful mapping for managing tabs
+map <leader>tn :tabnew<CR>
+map <leader>tm :tabmove
+
 " Map NERDTree to Ctrl + n
 map <C-n> :NERDTreeToggle<CR>
+
+" ,/ turn off search highlighting
+nmap <leader>/ :nohl<CR>
 
 "NORMAL MODE -----
 " don't use arrow keys
@@ -97,6 +116,9 @@ inoremap <Right> <NOP>
 "=====================
 "  / Custom Remapping
 "=====================
+
+" Enable phpcd omnicomplete
+autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
 
 " Closes NERDTree explorer if it is the only opened window
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
