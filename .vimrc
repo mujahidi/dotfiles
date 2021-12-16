@@ -49,6 +49,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdcommenter'
+Plug 'tomasiser/vim-code-dark'
 call plug#end()
 
 
@@ -57,7 +58,9 @@ if has('termguicolors')
 endif
 
 set background=dark
-colorscheme gruvbox
+colorscheme codedark
+
+let g:airline_theme = 'codedark'
 
 let mapleader = " " "space leader key
 
@@ -71,7 +74,13 @@ nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
 nnoremap <leader>sv :wincmd v <bar> :wincmd l<CR> "Split current window vertically
 
-" Resizing Windows
+" Buffers Navigation
+nnoremap <leader>bl :buffers<CR>
+nnoremap <leader>bn :bnext<CR>
+nnoremap <leader>bp :bprev<CR>
+nnoremap <leader>bd :bd<CR>
+
+"_Resizing Windows
 nnoremap <silent> <Leader>r+ :vertical resize +10<CR>
 nnoremap <silent> <Leader>r- :vertical resize -10<CR>
 
@@ -137,7 +146,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 
 "NERDCommenter
 nmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
+"nmap ++ <plug>NERDCommenterToggle
 
 "Insert Mode Navigation
 inoremap jj <Esc>
