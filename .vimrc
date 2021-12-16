@@ -1,105 +1,145 @@
-syntax on "basic highlighting
+syntax on
 
-set ruler "show the cursor position all the time
-set encoding=utf8 "Set utf8 as standard encoding and en_US as the standard language
-set noerrorbells "sound effects when go to EOL
-set tabstop=4 softtabstop=4 "tab indentation, softtabstop = spaces long
-set shiftwidth=4 "shifts it over by spaces
-set expandtab
-set smartindent "let vim indent for me
-set nowrap "no wrapping
-"set smartcase "case-sensitive searching
-set noswapfile "since we are using undodir and undofile
-set nobackup
-set undodir=~/.vim/undodir "location of undo dir. Needs to create this folder
-set undofile "file per file undo
-set incsearch "highlight results while typing keywords
-set laststatus=2
+set encoding=UTF-8
+set nocompatible "use VIM settings rather than VI
+filetype off
+filetype plugin on
+
 set cursorline
-set ignorecase "Ignore case when searching
-set hlsearch "Highlight search results
-set showmatch "Show matching brackets when text indicator is over them
-set mat=2 "how many tenths of a second to blink when matching brackets
-"set foldcolumn=1 "add a bit extra margin to the left
-
-set nocompatible
-set vb t_vb=        "no visual bell & flash
-
-" turn hybrid line numbers on
-:set number relativenumber
-:set nu rnu
-
-" Column width, color
+set exrc "will automatically source '.vimrc' inside a project when doing 'vim .'
+set relativenumber
+set nu
+set nohlsearch
+set hidden "Keeps background buffers active
+set noerrorbells
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
+set nowrap
+set smartcase
+set ignorecase
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+set incsearch
+set termguicolors
+set showmatch
+set mat=2
+set scrolloff=8 "starts scrolling when bottom or top is 8 rows away
 set colorcolumn=80
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+set signcolumn=yes
 
-" ---------------------
-" PLUGINS
-" ---------------------
-" Specify a directory for plugins
-" - Avoid using standard Vim directory names like 'plugin'
+set cmdheight=2 " Give more space for displaying messages.
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
 call plug#begin('~/.vim/plugged')
-
-" Make sure you use single quotes
-Plug 'https://github.com/zefei/simple-dark' "theme
-Plug 'kien/ctrlp.vim' "file finding
-Plug 'mbbill/undotree' 
-Plug 'junegunn/vim-easy-align'
-Plug 'preservim/nerdtree' "file explorer
-Plug 'itchyny/lightline.vim' "status bar
-Plug 'mhinz/vim-startify' "start up page
-Plug 'https://github.com/tyru/open-browser.vim' "open URI with browser
-Plug 'https://github.com/tpope/vim-surround' "quoting & parenthesizing
-Plug 'ervandew/supertab' 
-
-Plug 'lvht/msgpack-rpc'
-Plug 'lvht/phpcd.vim'
-Plug 'StanAngeloff/php.vim' "php syntax
-Plug 'stephpy/vim-php-cs-fixer' "php formatting
-Plug 'dsawardekar/wordpress.vim' "For WP Dev
-
-
-" Initialize plugin system
+"Plug 'sainnhe/gruvbox-material'
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'mbbill/undotree'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'airblade/vim-gitgutter'
+Plug 'ryanoasis/vim-devicons'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
-" ---------------------
-" / PLUGINS
-" ---------------------
-"
-colorscheme simple-dark
+
+if has('termguicolors')
+    set termguicolors
+endif
+
 set background=dark
+colorscheme gruvbox
 
-let g:wordpress_vim_wordpress_path="~/wordpress"
-set tags+=~/wordpress/tags
+let mapleader = " " "space leader key
 
-"=====================
-"   Custom Remapping
-"=====================
-nnoremap <Space> <nop>
-let mapleader = " " "space leader key to do special actions
-"leaderkey + w saves the file"
 noremap <leader>w :w<CR>
 noremap <leader>q :q<CR>
-noremap <leader>r :source %<CR>
 
-" Useful mapping for managing tabs
-map <leader>tn :tabnew<CR>
-map <leader>tm :tabmove
+" Switch between windows
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>sv :wincmd v <bar> :wincmd l<CR> "Split current window vertically
 
-" Map NERDTree to Ctrl + n
-map <C-n> :NERDTreeToggle<CR>
+" Resizing Windows
+nnoremap <silent> <Leader>r+ :vertical resize +10<CR>
+nnoremap <silent> <Leader>r- :vertical resize -10<CR>
 
-" ,/ turn off search highlighting
-nmap <leader>/ :nohl<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 
-"NORMAL MODE -----
-" don't use arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" COC
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+"COC Config
+let g:coc_global_extensions = [
+    \ 'coc-snippets',
+    \ 'coc-pairs',
+    \ 'coc-tsserver',
+    \ 'coc-html',
+    \ 'coc-css',
+    \ 'coc-phpls',
+    \ 'coc-prettier',
+    \ 'coc-json',
+    \ ]
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
-"INSERT MODE -----
+" nerdtree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <C-M> :NERDTreeFind<CR>
+let g:NERDTreeIgnore = ['^node_modules$']
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
+"NERDCommenter
+nmap ++ <plug>NERDCommenterToggle
+nmap ++ <plug>NERDCommenterToggle
+
+"Insert Mode Navigation
 inoremap jj <Esc>
 inoremap kk <Esc>
 inoremap <C-k> <Up>
@@ -107,23 +147,13 @@ inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
-"don't use arrows keys even in insert mode
-inoremap <Up>    <NOP>
-inoremap <Down>  <NOP>
-inoremap <Left>  <NOP>
-inoremap <Right> <NOP>
+fun! TrimWhiteSpace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
 
-"=====================
-"  / Custom Remapping
-"=====================
-
-" Enable phpcd omnicomplete
-autocmd FileType php setlocal omnifunc=phpcd#CompletePHP
-
-" Closes NERDTree explorer if it is the only opened window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" open a NERDTree automatically when vim starts up if no files were specified
-" FOLLOWING LINES ARE COMMENT OUT FOR START UP PAGE
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+augroup WhiteSpaceTrimListener
+    autocmd!
+    autocmd BufWritePre * :call TrimWhiteSpace()
+augroup END
