@@ -85,9 +85,11 @@ nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprev<CR>
 nnoremap <leader>bd :bd<CR>
 
-"_Resizing Windows
-nnoremap <silent> <Leader>r+ :vertical resize +10<CR>
-nnoremap <silent> <Leader>r- :vertical resize -10<CR>
+" bind arrow keys to pan resizing
+nnoremap <Up> :resize -5<CR>
+nnoremap <Down> :resize +5<CR>
+nnoremap <Left> :vertical resize +5<CR>
+nnoremap <Right> :vertical resize -5<CR>
 
 nnoremap <leader>u :UndotreeToggle<CR>
 
