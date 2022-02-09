@@ -51,6 +51,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdcommenter'
 Plug 'tomasiser/vim-code-dark'
 Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+Plug 'mattn/emmet-vim'
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'yegappan/taglist'
 call plug#end()
 
 
@@ -86,6 +90,8 @@ nnoremap <silent> <Leader>r+ :vertical resize +10<CR>
 nnoremap <silent> <Leader>r- :vertical resize -10<CR>
 
 nnoremap <leader>u :UndotreeToggle<CR>
+
+noremap <leader>t :Tlist<CR>
 
 " COC
 " Use tab for trigger completion with characters ahead and navigate.
@@ -145,6 +151,14 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
                 \ 'Clean'     :'✔︎',
                 \ 'Unknown'   :'?',
                 \ }
+
+"Emmet
+let g:user_emmet_install_global = 0
+let g:user_emmet_leader_key = ','
+autocmd FileType html,css,php EmmetInstall
+
+"Tag Along
+let g:tagalong_verbose = 1
 
 "NERDCommenter
 nmap ++ <plug>NERDCommenterToggle
