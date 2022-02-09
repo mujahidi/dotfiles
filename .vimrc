@@ -50,6 +50,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdcommenter'
 Plug 'tomasiser/vim-code-dark'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 
@@ -125,6 +126,7 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+let g:coc_disable_startup_warning = 1 "disable coc warning
 
 " nerdtree
 nnoremap <leader>n :NERDTreeFocus<CR>
