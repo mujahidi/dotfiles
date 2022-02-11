@@ -12,6 +12,7 @@ set nu
 set nohlsearch
 set hidden "Keeps background buffers active
 set noerrorbells
+set novisualbell
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
@@ -25,6 +26,8 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set termguicolors
+set path+=** " Search down into subfolders
+set wildmenu " display all matching files when tab complete
 set showmatch
 set mat=2
 set scrolloff=8 "starts scrolling when bottom or top is 8 rows away
@@ -94,6 +97,12 @@ nnoremap <Right> :vertical resize -5<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 
 noremap <leader>t :Tlist<CR>
+
+"Adds WP while() loop and moves the cursor in between in insert mode
+nnoremap ,loop :-1read $HOME/.vim/.wp_while.php<CR>ji
+
+"Adds ACF row loop
+nnoremap ,acf :-1read $HOME/.vim/.acf_row.php<CR>f'li
 
 " COC
 " Use tab for trigger completion with characters ahead and navigate.
